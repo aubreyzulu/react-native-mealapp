@@ -4,6 +4,7 @@
     "slug": "react-meal-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "backgroundColor": "#24180f",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -14,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
