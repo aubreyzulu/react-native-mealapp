@@ -59,34 +59,29 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <Provider store={store}>
-        <FavoritesContextProvider>
-          <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{
-                headerStyle: { backgroundColor: '#351401' },
-                headerTintColor: 'white',
-                contentStyle: { backgroundColor: '#3f2f25' },
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: '#351401' },
+              headerTintColor: 'white',
+              contentStyle: { backgroundColor: '#3f2f25' },
+            }}
+          >
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
               }}
-            >
-              <Stack.Screen
-                name="Drawer"
-                component={DrawerNavigator}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="MealOverview"
-                component={MealOverviewScreen}
-              />
-              <Stack.Screen
-                name="MealDetail"
-                component={MealDetailScreen}
-                options={{ title: 'About the meal' }}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </FavoritesContextProvider>
+            />
+            <Stack.Screen name="MealOverview" component={MealOverviewScreen} />
+            <Stack.Screen
+              name="MealDetail"
+              component={MealDetailScreen}
+              options={{ title: 'About the meal' }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     </>
   );
