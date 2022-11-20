@@ -13,16 +13,32 @@ import MealDetails from '../components/MealDetails';
 import SubTitle from '../components/SubTitle';
 import { MEALS } from '../data/dummy-data';
 import { MealDetailScreenProps } from '../navigation/types';
+import { useFavorites } from '../store/context/favorites-context';
 
 function MealDetailScreen({ route, navigation }: MealDetailScreenProps) {
   const { mealId } = route.params;
+  const {
+    state: { favorites, addToFavorites, removeFromFavorites },
+  } = useFavorites();
+  const isMealFavorite = favorites.includes(mealId);
   const meal = MEALS.find((meal) => meal.id === mealId);
-  function handleIconPress() {}
+
+  function handleMealFavorite() {
+    if (isMealFavorite) {
+      removeFromFavorites(mealId);
+    } else {
+      addToFavorites(mealId);
+    }
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton color="white" icon="star" onPressed={handleIconPress} />
+        <IconButton
+          color="white"
+          icon={isMealFavorite ? 'star' : 'star-outline'}
+          onPressed={handleMealFavorite}
+        />
       ),
     });
   }, [navigation]);

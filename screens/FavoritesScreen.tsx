@@ -1,12 +1,34 @@
 import { StyleSheet, Text, View } from 'react-native';
+import MealsList from '../components/MealsList';
+import { MEALS } from '../data/dummy-data';
+import { useFavorites } from '../store/context/favorites-context';
 
 function FavoritesScreen() {
-  return (
-    <View>
-      <Text>Favorites Screen</Text>
-    </View>
-  );
+  const {
+    state: { favorites },
+  } = useFavorites();
+
+  const favoriteMeals = MEALS.filter((meal) => favorites.includes(meal.id));
+  if (favoriteMeals.length === 0) {
+    return (
+      <View style={styles.root}>
+        <Text style={styles.text}>You have no favorites meals yet</Text>
+      </View>
+    );
+  }
+  return <MealsList data={favoriteMeals} />;
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});
 export default FavoritesScreen;
